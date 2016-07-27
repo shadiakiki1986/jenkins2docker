@@ -1,13 +1,20 @@
 version: '2'
 services:
-  ci:
-    image: jenkins:2.0
+  master:
+    image: jenkins:latest
     ports:
      - "8080:8080"
      - "50000:50000"
-    links:
-    - node_ci
-  node_ci:
-   build: ./slave_node_alpine
-   ports:
-    - 22
+    depends_on:
+    - slave_raw
+    - slave_nodejs
+
+  slave_raw:
+    build: 
+      context: .
+      dockerfile: Dockerfile-slave-raw
+
+  slave_nodejs:
+    build: 
+      context: .
+      dockerfile: Dockerfile-slave-nodejs
