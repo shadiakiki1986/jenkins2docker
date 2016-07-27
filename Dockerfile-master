@@ -1,9 +1,12 @@
 FROM jenkins:latest
+
+ARG user=jenkins
+USER ${user}
 COPY jenkins_home/nodes/php7/config.xml        /var/jenkins_home/nodes/php7/config.xml
 COPY jenkins_home/jobs/ffa-php-core/config.xml /var/jenkins_home/jobs/ffa-php-core/config.xml
 COPY jenkins_home/users/shadi/config.xml       /var/jenkins_home/users/shadi/config.xml
 
-ARG user=jenkins
 USER root
-RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
+RUN chown -R ${user} "$JENKINS_HOME"
 USER ${user}
+
