@@ -1,6 +1,8 @@
 FROM alpine
 
-RUN bash slave_core.sh
+COPY slave_core.sh .
+RUN chmod +x /slave_core.sh
+RUN /slave_core.sh
 
 USER jenkins
 EXPOSE 22

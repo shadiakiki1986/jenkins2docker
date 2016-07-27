@@ -1,6 +1,8 @@
 FROM mhart/alpine-node:4
 
-RUN bash slave_core.sh
+COPY slave_core.sh .
+RUN chmod +x /slave_core.sh
+RUN /slave_core.sh
 
 USER jenkins
 RUN touch ~/.sudo_as_admin_successful
