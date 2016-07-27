@@ -36,4 +36,4 @@ if [ "$(grepCont|wc -l)" != "1" ]; then
   exit 1
 fi
 docker cp `grepCont|awk '{print $1}'`:/var/jenkins_home/secrets $TARGET
-
+sudo chmod 775 -R $TARGET/secrets
