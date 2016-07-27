@@ -2,7 +2,6 @@
 
 if [[ -z "$1" ]]; then
   echo "Usage: export.sh jenkins_home"
-  echo "       export.sh ../shadi-configs/ffa24/jenkins_home/"
   exit 1
 fi
 
