@@ -1,12 +1,16 @@
 FROM jenkins:latest
 
-ARG user=jenkins
-USER ${user}
-COPY jenkins_home/nodes/php7/config.xml        /var/jenkins_home/nodes/php7/config.xml
-COPY jenkins_home/jobs/ffa-php-core/config.xml /var/jenkins_home/jobs/ffa-php-core/config.xml
-COPY jenkins_home/users/shadi/config.xml       /var/jenkins_home/users/shadi/config.xml
+# use CLI to install plugins from configs and do some config stuff
+# https://github.com/jenkinsci/docker#preinstalling-plugins
+# Plus, I need to specify the dependencies of ssh-slaves because it seems that the install-plugins.sh script does not automatically install them (bug?)
+# https://github.com/jenkinsci/docker/commit/82272776de574fad2ab0e654a9dcd60df1472d52
+RUN /usr/local/bin/install-plugins.sh credentials ssh-credentials ssh-slaves
 
-USER root
-RUN chown -R ${user} "$JENKINS_HOME"
-USER ${user}
+# indicate that this jenkins is fully configured
+# This is not working
+# RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+
+# copy default jenkins_home content
+# https://github.com/jenkinsci/docker#installing-more-tools
+COPY jenkins_home/ /usr/share/jenkins/ref/
 
