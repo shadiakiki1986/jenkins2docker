@@ -4,8 +4,15 @@ FROM jenkins:latest
 # https://github.com/jenkinsci/docker#preinstalling-plugins
 # Plus, I need to specify the dependencies of ssh-slaves because it seems that the install-plugins.sh script does not automatically install them (bug?)
 # https://github.com/jenkinsci/docker/commit/82272776de574fad2ab0e654a9dcd60df1472d52
-RUN /usr/local/bin/install-plugins.sh credentials ssh-credentials ssh-slaves
-RUN /usr/local/bin/install-plugins.sh matrix-project promoted-builds scm-api parameterized-trigger workflow-scm-step mailer git-client token-macro git
+RUN /usr/local/bin/install-plugins.sh \
+  credentials ssh-credentials ssh-slaves \
+  junit script-security matrix-project \
+  javadoc maven-plugin \
+  rebuild job-dsl token-macro project-inheritance script-security promoted-builds \
+  scm-api \
+  promoted-builds subversion conditional-buildstep matrix-project  parameterized-trigger \
+  workflow-step-api workflow-scm-step \
+  mailer git-client token-macro git
 
 # indicate that this jenkins is fully configured
 # This is not working
