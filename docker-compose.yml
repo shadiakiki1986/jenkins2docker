@@ -27,5 +27,3 @@ services:
       context: .
       dockerfile: Dockerfile-slave-php7
 
-  test:
-    image: ubuntu
