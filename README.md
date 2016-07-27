@@ -2,8 +2,11 @@
 Jenkins server in FFA
 
 # Run
-`docker-compose up`
-then manually go to `configure jenkins` and install `ssh slaves plugin`
+1. `docker-compose up`
+ * currently I have trouble with the file ownership in `/var/jenkins_home`
+2. then manually go to `configure jenkins` and install `ssh slaves plugin`
+3. configure the php7, add credentials (todo to be copied)
+4. launch slave agent
 
 # Back-up configs
 ```bash
