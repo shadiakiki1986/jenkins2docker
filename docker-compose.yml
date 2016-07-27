@@ -8,6 +8,7 @@ services:
     depends_on:
     - slave_raw
     - slave_nodejs
+    - slave_php7
 
   slave_raw:
     build: 
@@ -18,3 +19,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-slave-nodejs
+
+  slave_php7:
+    build: 
+      context: .
+      dockerfile: Dockerfile-slave-php7

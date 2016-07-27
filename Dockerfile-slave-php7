@@ -1,7 +1,10 @@
-FROM alpine
+FROM php:7-alpine
 
 RUN bash slave_core.sh
 
 USER jenkins
+RUN touch ~/.sudo_as_admin_successful
+WORKDIR /home/jenkins
+
 EXPOSE 22
 CMD ["sudo", "/usr/sbin/sshd", "-D"]
