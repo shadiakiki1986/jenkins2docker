@@ -17,10 +17,10 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working#Compiling_:_a_few_notes_and_a_reminder
 RUN apk --update add \
       build-base gcc abuild binutils binutils-doc gcc-doc \
-      autoconf openssl-dev && \
+      autoconf openssl-dev > /dev/null && \
     rm -rf /var/cache/apk/* && \
     pecl channel-update pecl.php.net && \
-    pecl install zip mongodb < /dev/null && \
+    pecl install zip mongodb < /dev/null > /dev/null && \
     docker-php-ext-enable mongodb zip
 
 USER jenkins

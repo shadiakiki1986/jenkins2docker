@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apk --update add openjdk7-jre openssh git && \
+apk --update add openjdk7-jre openssh git > /dev/null && \
     rm -rf /var/cache/apk/* 
 
 /usr/bin/java -version
@@ -18,6 +18,6 @@ set -x && \
     echo "AllowGroups jenkins" >> /etc/ssh/sshd_config
 
 # Comment these lines to disable sudo
-apk --update add sudo && \
+apk --update add sudo > /dev/null && \
     rm -rf /var/cache/apk/* && \
     echo "%jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
