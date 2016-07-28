@@ -1,4 +1,6 @@
 #!/bin/bash
+# bash script for exporting from a running jenkins service (from the docker-compose.yml file)
+# example files for my particular use case
 
 if [[ -z "$1" ]]; then
   echo "Usage: export.sh jenkins_home"
