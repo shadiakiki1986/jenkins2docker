@@ -1,25 +1,26 @@
 FROM php:7-alpine
 
 COPY slave_core.sh .
-RUN chmod +x /slave_core.sh
-RUN /slave_core.sh
+RUN chmod +x /slave_core.sh && \
+    /slave_core.sh
 
+# Install php composer
 # https://gist.github.com/timani/409047574d6bd8f77a5a
 # RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -sS https://getcomposer.org/installer | php && \
     chmod +x composer.phar && \
-    mv composer.phar /usr/local/bin/composer
-RUN echo 'export PATH=$PATH:/usr/local/bin' >> /etc/profile
+    mv composer.phar /usr/local/bin/composer && \
+    echo 'export PATH=$PATH:/usr/local/bin' >> /etc/profile
 
-# php extensions
+# Install php extensions
 # https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working#Compiling_:_a_few_notes_and_a_reminder
-RUN apk --update add build-base gcc abuild binutils binutils-doc gcc-doc && \
-    rm -rf /var/cache/apk/* 
-RUN apk --update add autoconf openssl-dev && \
-    rm -rf /var/cache/apk/* 
-RUN pecl channel-update pecl.php.net && \
-    pecl install zip mongodb < /dev/null
-RUN docker-php-ext-enable mongodb zip
+RUN apk --update add \
+      build-base gcc abuild binutils binutils-doc gcc-doc \
+      autoconf openssl-dev && \
+    rm -rf /var/cache/apk/* && \
+    pecl channel-update pecl.php.net && \
+    pecl install zip mongodb < /dev/null && \
+    docker-php-ext-enable mongodb zip
 
 USER jenkins
 RUN composer --version
