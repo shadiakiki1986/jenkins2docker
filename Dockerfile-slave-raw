@@ -2,7 +2,7 @@ FROM alpine
 
 COPY slave_core.sh .
 RUN chmod +x /slave_core.sh
-RUN /slave_core.sh
+RUN /slave_core.sh > /dev/null
 
 USER jenkins
 EXPOSE 22

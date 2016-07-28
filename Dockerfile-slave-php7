@@ -2,7 +2,8 @@ FROM php:7-alpine
 
 COPY slave_core.sh .
 RUN chmod +x /slave_core.sh
-RUN /slave_core.sh # this gives a 'file busy' error if included with chmod above as 'chmod .. && /slave...sh'
+# this gives a 'file busy' error if included with chmod above as 'chmod .. && /slave...sh'
+RUN /slave_core.sh > /dev/null
 
 # Install php composer
 # https://gist.github.com/timani/409047574d6bd8f77a5a
