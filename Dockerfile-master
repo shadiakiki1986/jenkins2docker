@@ -7,7 +7,7 @@ FROM jenkins:latest
 RUN /usr/local/bin/install-plugins.sh \
   credentials ssh-credentials ssh-slaves \
   junit script-security \
-  javadoc maven-plugin \
+  javadoc maven \
   rebuild job-dsl project-inheritance \
   scm-api \
   run-condition structs mapdb-api \
