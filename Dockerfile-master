@@ -6,15 +6,16 @@ FROM jenkins:latest
 # https://github.com/jenkinsci/docker/commit/82272776de574fad2ab0e654a9dcd60df1472d52
 RUN /usr/local/bin/install-plugins.sh \
   credentials ssh-credentials ssh-slaves \
-  junit script-security matrix-project \
+  junit script-security \
   javadoc maven-plugin \
-  rebuild job-dsl token-macro project-inheritance script-security promoted-builds \
+  rebuild job-dsl project-inheritance \
   scm-api \
   run-condition structs mapdb-api \
-  promoted-builds subversion conditional-buildstep matrix-project \
+  subversion conditional-buildstep \
   workflow-step-api workflow-scm-step \
   mailer token-macro
-
+RUN /usr/local/bin/install-plugins.sh \
+  matrix-project promoted-builds
 RUN /usr/local/bin/install-plugins.sh \
   git-client git parameterized-trigger
 
